@@ -2,21 +2,15 @@ package com.mds.bdms.controller;
 
 import java.util.List;
 
+import com.mds.bdms.pojo.DonorRecordPojo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.mds.bdms.constant.GlobalConstant;
 import com.mds.bdms.entity.DonorRecord;
-import com.mds.bdms.pojo.DonorRecordPojo;
 import com.mds.bdms.response.BaseResponse;
 import com.mds.bdms.service.DonorRecordService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 public class DonorRecordController {
@@ -48,15 +42,15 @@ public class DonorRecordController {
     }
 
     @PostMapping(value = "/donorRecord")
-    public BaseResponse createDonorRecord(@RequestBody DonorRecord donorRecord){
+    public BaseResponse createDonorRecord(@RequestBody DonorRecordPojo donorRecordPojo){
+        DonorRecord donorRecord = null;
         try {
-            donorRecord = donorRecordService.addDonorRecord(donorRecord);
+            donorRecord = donorRecordService.addDonorRecord(donorRecordPojo);
         }catch(Exception e) {
             System.out.println("Error occur "+e.getMessage());
             return new BaseResponse(GlobalConstant.FAIL, null, GlobalConstant.Message.FAIL_MESSAGE);
         }
         return new BaseResponse(GlobalConstant.SUCCESS, donorRecord, GlobalConstant.Message.SUCCESS_MESSAGE);
-
     }
 
     @DeleteMapping(value="/donorRecord/{id}")
@@ -71,26 +65,26 @@ public class DonorRecordController {
 
     }
 
-    @PutMapping (value = "/donorRecord")
-    public BaseResponse updateDonorRecord(@RequestBody DonorRecordPojo donorRecordPojo) {
-       DonorRecord donorRecords;
+    // @PutMapping (value = "/donorRecord")
+    // public BaseResponse updateDonorRecord(@RequestBody DonorRecordPojo donorRecordPojo) {
+    //    DonorRecord donorRecords;
 
-        try{
-            DonorRecord donorRecord = donorRecordService.findById(donorRecordPojo.getId());
+    //     try{
+    //         DonorRecord donorRecord = donorRecordService.findById(donorRecordPojo.getId());
 
-            if(donorRecord==null) {
-                return null;
-            }
-            donorRecord.setId(donorRecordPojo.getDonorId());
-            donorRecord.setDonationDate(donorRecordPojo.getDonationDate());
-            donorRecord.setDonorId(donorRecordPojo.getDonorId());
-            donorRecords=donorRecordService.save(donorRecord);
-        }catch(Exception e) {
-            System.out.println("Error occur "+e.getMessage());
-            return new BaseResponse(GlobalConstant.FAIL, null, GlobalConstant.Message.FAIL_MESSAGE);
-        }
+    //         if(donorRecord==null) {
+    //             return null;
+    //         }
+    //         donorRecord.setId(donorRecordPojo.getDonorId());
+    //         donorRecord.setDonationDate(donorRecordPojo.getDonationDate());
+    //         donorRecord.setDonorId(donorRecordPojo.getDonorId());
+    //         donorRecords=donorRecordService.save(donorRecord);
+    //     }catch(Exception e) {
+    //         System.out.println("Error occur "+e.getMessage());
+    //         return new BaseResponse(GlobalConstant.FAIL, null, GlobalConstant.Message.FAIL_MESSAGE);
+    //     }
 
-        return new BaseResponse(GlobalConstant.SUCCESS, donorRecords,GlobalConstant.Message.SUCCESS_MESSAGE);
+    //     return new BaseResponse(GlobalConstant.SUCCESS, donorRecords,GlobalConstant.Message.SUCCESS_MESSAGE);
 
-    }
+    // }
 }

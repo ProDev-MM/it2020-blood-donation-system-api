@@ -1,6 +1,9 @@
 package com.mds.bdms.pojo;
 
+import com.mds.bdms.entity.DonorRecord;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public class DonorPojo {
 
@@ -14,11 +17,13 @@ public class DonorPojo {
 	String homePhone;
 	LocalDate registerDate;
 	LocalDate lastDonationDate;
-	
-	
-	
-	public DonorPojo(Long id, String name, String gender,String bloodType,String address,LocalDate dateOfBirth
-			,String mainPhone,String homePhone,LocalDate registerDate,LocalDate lastDonationDate) {
+	List<DonorRecord> donorRecords;
+
+	public DonorPojo() {
+	}
+
+	public DonorPojo(Long id, String name, String gender, String bloodType, String address, LocalDate dateOfBirth
+			, String mainPhone, String homePhone, LocalDate registerDate, LocalDate lastDonationDate) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -93,7 +98,10 @@ public class DonorPojo {
 	public void setLastDonationDate(LocalDate lastDonationDate) {
 		this.lastDonationDate = lastDonationDate;
 	}
-	
-	
-	 
+	public List<DonorRecord> getDonorRecords() {
+		return donorRecords;
+	}
+	public void setDonorRecords(List<DonorRecord> donorRecords) {
+		this.donorRecords = donorRecords;
+	}
 }

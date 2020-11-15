@@ -6,11 +6,10 @@ public class DonorRecordPojo {
 	Long id;
 	LocalDate donationDate;
 	Long donorId;
-	public DonorRecordPojo(Long id,LocalDate donationDate,Long donorId) {
-		this.id=id;
-		this.donationDate=donationDate;
-		this.donorId=donorId;
+
+	public DonorRecordPojo() {
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -29,6 +28,13 @@ public class DonorRecordPojo {
 	public void setDonorId(Long donorId) {
 		this.donorId = donorId;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "DonorRecordPojo{" +
+				"id=" + id +
+				", donationDate=" + donationDate +
+				", donorId=" + donorId +
+				'}';
+	}
 }

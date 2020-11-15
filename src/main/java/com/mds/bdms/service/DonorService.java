@@ -1,15 +1,15 @@
 package com.mds.bdms.service;
 
-import java.util.List;
-
+import com.mds.bdms.entity.Donor;
+import com.mds.bdms.repository.DonorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mds.bdms.entity.Donor;
-import com.mds.bdms.repository.DonorRepository;
+import java.util.List;
 
 @Service
 public class DonorService {
+
     @Autowired
     DonorRepository donorRepository;
 
@@ -21,10 +21,6 @@ public class DonorService {
         return donorRepository.findById(id).orElse(null);
     }
 
-    public Donor addDonor(Donor donor) {
-        return donorRepository.save(donor);
-    }
-
     public void deleteDonor(Long id) {
         donorRepository.deleteById(id);
     }
@@ -32,4 +28,5 @@ public class DonorService {
     public Donor save(Donor donor) {
         return donorRepository.save(donor);
     }
+
 }

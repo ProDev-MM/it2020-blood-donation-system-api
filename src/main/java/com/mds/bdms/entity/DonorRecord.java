@@ -1,5 +1,4 @@
 package com.mds.bdms.entity;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 

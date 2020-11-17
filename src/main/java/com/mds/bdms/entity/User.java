@@ -1,5 +1,4 @@
 package com.mds.bdms.entity;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

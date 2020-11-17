@@ -4,7 +4,6 @@ import com.mds.bdms.entity.Donor;
 import com.mds.bdms.repository.DonorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -27,6 +26,12 @@ public class DonorService {
 
     public Donor save(Donor donor) {
         return donorRepository.save(donor);
+    }
+    
+    public List<Object[]>findByBloodType(String bloodType){
+    	
+    	return donorRepository.findByBloodType(bloodType);
+    	
     }
 
 }

@@ -1,5 +1,6 @@
 package com.mds.bdms.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.mds.bdms.constant.GlobalConstant;
 import com.mds.bdms.entity.Donor;
 import com.mds.bdms.entity.DonorRecord;
+import com.mds.bdms.pojo.DonorInfo;
 import com.mds.bdms.pojo.DonorPojo;
 import com.mds.bdms.response.BaseResponse;
 import com.mds.bdms.service.DonorRecordService;
@@ -39,7 +41,7 @@ public class DonorController {
         try{
             Donor donor = donorService.findById(id);
             List<DonorRecord> donorRecords = donorRecordService.getRecordByDonorId(id);
-            // donor to donorPojo
+       
             donorPojo.setName(donor.getName());
             donorPojo.setGender(donor.getGender());
             donorPojo.setBloodType(donor.getBloodType());
@@ -64,6 +66,7 @@ public class DonorController {
         return donorService.save(donor);
     }
 
+    
     @DeleteMapping(value="/donor/{id}")
     public BaseResponse deleteDonor(@PathVariable Long id){
         try {
@@ -105,4 +108,29 @@ public class DonorController {
         return new BaseResponse(GlobalConstant.SUCCESS, donors,GlobalConstant.Message.SUCCESS_MESSAGE);
 
     }
+
+    @GetMapping(value="/donors/bloodType")
+    @CrossOrigin
+    public List<DonorInfo> findByBloodType(String bloodType){
+    	List<Object[]> data=donorService.findByBloodType(bloodType);
+    	List<DonorInfo> donorList=new ArrayList<DonorInfo>();
+    	for ( Object object : data ) 
+    	{
+    		
+    	   Object[] a=(Object[]) object;
+           String id=a[0].toString();
+           String name=a[1].toString();
+           String bloodType1=a[2].toString();
+           String address=a[3].toString();
+           String main_phone=a[4].toString();
+           String home_phone=a[5].toString();
+           DonorInfo d=new DonorInfo(Long.parseLong(id),name,bloodType1,address,main_phone,home_phone);
+           donorList.add(d);
+         
+    	}
+    	
+    	return donorList;
+    	
+    }
+    
 }

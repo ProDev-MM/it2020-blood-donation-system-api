@@ -2,9 +2,7 @@ package com.mds.bdms.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+
 
 @Entity
 @Table(name = "donor")
@@ -31,9 +29,6 @@ public class Donor {
     private LocalDate registerDate;
     @Column
     private LocalDate lastDonationDate;
-//    @OneToMany
-//    @JoinColumn
-//    private List<DonorRecord> donorRecords;
 
 
     public Long getId() {
@@ -115,21 +110,15 @@ public class Donor {
     public void setHomePhone(String homePhone) {
         this.homePhone = homePhone;
     }
+    
+   
+    public Donor(Long id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 
-//    public Collection<DonorRecord> getDonorRecords() {
-//        return donorRecords;
-//    }
-//
-//    public void addDonorRecord(DonorRecord donorRecord) {
-//        if (donorRecords == null) {
-//            donorRecords = new ArrayList<DonorRecord>();
-//        }
-//        if (!donorRecords.contains(donorRecord)) {
-//            donorRecords.add(donorRecord);
-//        }
-//    }
-
-    @Override
+	@Override
     public String toString() {
         return "Donor [id=" + id + ", name=" + name + ", gender=" + gender + ", bloodType=" + bloodType
                 + ", dateOfBirth=" + dateOfBirth + ", address=" + address + ", mainPhone=" + mainPhone + ", homePhone="

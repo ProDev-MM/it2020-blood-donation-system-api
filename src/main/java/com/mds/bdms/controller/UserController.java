@@ -23,7 +23,6 @@ public class UserController{
     @GetMapping( value="/user")
     public List<User> getUser(){
         return userService.getUser();
-
     }
 
     @PostMapping(value="/user")

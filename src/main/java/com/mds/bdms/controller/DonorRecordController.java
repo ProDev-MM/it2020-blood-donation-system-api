@@ -65,26 +65,4 @@ public class DonorRecordController {
 
     }
 
-    // @PutMapping (value = "/donorRecord")
-    // public BaseResponse updateDonorRecord(@RequestBody DonorRecordPojo donorRecordPojo) {
-    //    DonorRecord donorRecords;
-
-    //     try{
-    //         DonorRecord donorRecord = donorRecordService.findById(donorRecordPojo.getId());
-
-    //         if(donorRecord==null) {
-    //             return null;
-    //         }
-    //         donorRecord.setId(donorRecordPojo.getDonorId());
-    //         donorRecord.setDonationDate(donorRecordPojo.getDonationDate());
-    //         donorRecord.setDonorId(donorRecordPojo.getDonorId());
-    //         donorRecords=donorRecordService.save(donorRecord);
-    //     }catch(Exception e) {
-    //         System.out.println("Error occur "+e.getMessage());
-    //         return new BaseResponse(GlobalConstant.FAIL, null, GlobalConstant.Message.FAIL_MESSAGE);
-    //     }
-
-    //     return new BaseResponse(GlobalConstant.SUCCESS, donorRecords,GlobalConstant.Message.SUCCESS_MESSAGE);
-
-    // }
 }

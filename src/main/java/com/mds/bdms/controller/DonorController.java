@@ -1,15 +1,10 @@
 package com.mds.bdms.controller;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import com.mds.bdms.constant.GlobalConstant;
 import com.mds.bdms.entity.Donor;
 import com.mds.bdms.entity.DonorRecord;
-import com.mds.bdms.pojo.DonorInfo;
 import com.mds.bdms.pojo.DonorPojo;
 import com.mds.bdms.response.BaseResponse;
 import com.mds.bdms.service.DonorRecordService;
@@ -62,8 +57,22 @@ public class DonorController {
 
 
     @PostMapping (value = "/donor")
-    public Donor createDonor(@RequestBody Donor donor){
-        return donorService.save(donor);
+    public BaseResponse createDonor(@RequestBody Donor donor){
+      Donor donors;
+      try {
+    	  List<Donor>name=donorService.findByName(donor.getName());
+    	  List<Donor>mainPhone=donorService.findByMainPhone(donor.getMainPhone());
+    	  if(name==null || !name.isEmpty() || mainPhone==null || !mainPhone.isEmpty() ) {
+    		  return new BaseResponse(GlobalConstant.FAIL,null,"Already exists !");
+    	  }
+    	  donors=donorService.save(donor);
+      }catch(Exception e) {
+    	  System.out.println("Error occur"+e.getMessage());
+    	  return new BaseResponse(GlobalConstant.FAIL,null,"Cannot create donor!");
+      }
+    	
+      return new BaseResponse(GlobalConstant.SUCCESS,donors,"Successful created!");
+        
     }
 
     
@@ -109,28 +118,22 @@ public class DonorController {
 
     }
 
+  
+    
     @GetMapping(value="/donors/bloodType")
     @CrossOrigin
-    public List<DonorInfo> findByBloodType(String bloodType){
-    	List<Object[]> data=donorService.findByBloodType(bloodType);
-    	List<DonorInfo> donorList=new ArrayList<DonorInfo>();
-    	for ( Object object : data ) 
-    	{
-    		
-    	   Object[] a=(Object[]) object;
-           String id=a[0].toString();
-           String name=a[1].toString();
-           String bloodType1=a[2].toString();
-           String address=a[3].toString();
-           String main_phone=a[4].toString();
-           String home_phone=a[5].toString();
-           DonorInfo d=new DonorInfo(Long.parseLong(id),name,bloodType1,address,main_phone,home_phone);
-           donorList.add(d);
-         
-    	}
-    	
-    	return donorList;
+    public List<Donor> findByBloodType(String bloodType){
+    	return donorService.findByBloodType(bloodType);
     	
     }
+    
+    @GetMapping(value="/donors/nameorGender")
+    @CrossOrigin
+    public List<Donor> findByNameorGender(String name,String gender){
+    	return donorService.findByNameorGender(name,gender);
+    	
+    }
+    
+   
     
 }

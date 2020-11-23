@@ -1,15 +1,16 @@
 package com.mds.bdms.entity;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
 
 @Entity
 @Table(name = "donor")
-@SequenceGenerator(name = "seq", initialValue = 1, allocationSize = 100)
+//@SequenceGenerator(name = "seq", initialValue = 1, allocationSize = 100)
 public class Donor {
+   
+   // @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     @Column
     private String name;
@@ -112,12 +113,7 @@ public class Donor {
     }
     
    
-    public Donor(Long id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
-
+   
 	@Override
     public String toString() {
         return "Donor [id=" + id + ", name=" + name + ", gender=" + gender + ", bloodType=" + bloodType

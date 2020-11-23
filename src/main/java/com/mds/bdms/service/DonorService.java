@@ -28,10 +28,24 @@ public class DonorService {
         return donorRepository.save(donor);
     }
     
-    public List<Object[]>findByBloodType(String bloodType){
-    	
-    	return donorRepository.findByBloodType(bloodType);
+    public List<Donor> findByName(String name) {
+        return donorRepository.findByName(name);
+    }
+    
+    public List<Donor> findByMainPhone(String mainPhone) {
+        return donorRepository.findByMainPhone(mainPhone);
+    }
+    
+    
+    public List<Donor>findByBloodType(String bloodType){
+    return donorRepository.findByBloodType(bloodType);
     	
     }
+    public List<Donor>findByNameorGender(String name,String gender){
+        return donorRepository.findByNameorGender(name,gender);
+        	
+        }
+    
 
+   
 }
